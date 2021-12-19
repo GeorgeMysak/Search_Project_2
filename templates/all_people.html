@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+        <table class="table">
+            <thread class = "thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Birthday</th>
+
+             </tr>
+            {% for item in result %}
+            <tr>
+                <td scope="row">{{ item.people_name }}</td>
+                <td scope="row">{{ item.people_email }}</td>
+                <td scope="row">{{ item.people_phone }}</td>
+                <td scope="row">{{ item.people_birthday }}</td>
+                <td>
+                    <a href="/edit_people/{{item.people_email}}" type="button" class="btn btn-warning">Edit</a>
+                    <a href="/delete_people/{{item.people_email}}" type="button" class="btn btn-danger">Delete</a>
+                </td>
+             </tr>
+            {% endfor %}
+            </thread>
+        </table>
+
+
+
+{% endblock %}

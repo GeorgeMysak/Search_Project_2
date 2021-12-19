@@ -1,0 +1,74 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+
+<div class="col-md-6 mx-auto">
+
+    <div class="card rounded-0">
+
+
+        <div class="card-body">
+            <div class="card-header">
+            <h3 class="mb-0">Edit People-Email: {{form_name}}</h3>
+        </div>
+
+            <form class="form" method="POST">
+                {{ form.hidden_tag() }}
+
+
+            <div class="form-group">
+                {{ form.people_name.label }}
+                {{ form.people_name(class_="form-control") }}
+
+                {% if form.people_name.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.people_name.errors %}
+                             <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {%endif%}
+            </div>
+
+
+            <div class="form-group">
+                {{ form.people_birthday.label }}
+                {{ form.people_birthday(class_="form-control") }}
+
+                {% if form.people_birthday.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.people_birthday.errors %}
+                             <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {%endif%}
+            </div>
+
+
+
+            <div class="form-group">
+                {{ form.people_phone.label }}
+                {{ form.people_phone(class_="form-control") }}
+
+                {% if form.people_phone.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.people_phone.errors %}
+                             <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {%endif%}
+            </div>
+
+
+                {{ form.submit(class_="btn btn-success") }}
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock %}

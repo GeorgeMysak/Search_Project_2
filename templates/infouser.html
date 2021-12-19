@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+        <table class="table">
+            <thread class = "thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Birthday</th>
+
+             </tr>
+            {% for item in result %}
+            <tr>
+                {% if item.people_email == session['people_email']%}
+                    <td scope="row">{{ item.people_name }}</td>
+                    <td scope="row">{{ item.people_email }}</td>
+                    <td scope="row">{{ item.people_phone }}</td>
+                    <td scope="row">{{ item.people_birthday }}</td>
+                    <td>
+                        <a href="/edit_user/{{item.people_email}}" type="button" class="btn btn-warning">Edit</a>
+                    </td>
+             </tr>
+                {% endif %}
+            {% endfor %}
+            </thread>
+        </table>
+
+
+
+{% endblock %}

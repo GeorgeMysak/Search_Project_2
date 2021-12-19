@@ -1,0 +1,27 @@
+ARG APP_IMAGE=ubuntu:20.10
+
+FROM $APP_IMAGE AS base
+
+FROM base as builder
+
+RUN \
+    apt-get update && \
+    apt-get postgresql-libs && \
+    apt-get --virtual .build-deps gcc musl-dev postgresql-dev && \
+    apt-get install -y python3 python3-pip &&\
+    apt-get --purge del .build-deps
+
+RUN mkdir /requirements
+WORKDIR /requirements
+
+COPY requirements.txt /requirements.txt
+
+RUN pip3 install --install-option="--prefix=/requirements" -r /requirements.txt
+
+FROM base
+ENV FLASK_APP app.py
+WORKDIR /app
+COPY --from=builder /requirements /usr/local
+ADD . /app
+
+ENTRYPOINT ["python3", "-m", "flask", "run", "--host=0.0.0.0"]

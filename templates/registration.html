@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+
+
+<div class="col-md-6 mx-auto">
+
+    <div class="card rounded-0">
+
+        <div class="card-header">
+            <h3 class="mb-0">{{form_name}}</h3>
+        </div>
+        <div class="card-body">
+
+            <form class="form" method="POST">
+                {{ form.hidden_tag() }}
+
+
+            <div class="form-group">
+                {{ form.people_email.label }}
+                {{ form.people_email(class_="form-control") }}
+
+                {% if form.people_email.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.people_email.errors %}
+                             <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {%endif%}
+            </div>
+
+            <div class="form-group">
+                {{ form.people_password.label }}
+                {{ form.people_password(class_="form-control") }}
+
+                {% if form.people_password.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.people_password.errors %}
+                             <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {%endif%}
+            </div>
+
+            <div class="form-group">
+                {{ form.people_confirm_password.label }}
+                {{ form.people_confirm_password(class_="form-control") }}
+
+                {% if form.people_confirm_password.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.people_confirm_password.errors %}
+                             <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {%endif%}
+            </div>
+
+            <div class="">
+                {{ form.submit(class_="btn btn-success") }}
+                <a href="/login" class="btn-link btn-link">Sign in</a>
+            </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+
+{% endblock %}

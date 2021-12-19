@@ -1,0 +1,61 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+        <table class="table">
+            <thread class = "thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Detailed info</th>
+             </tr>
+            {% for item in result %}
+            <tr>
+                <td scope="row">{{ item.fest_name }}</td>
+                <td scope="row">{{ item.fest_date }}</td>
+                <td scope="row">
+                    <script>
+                    function readMore(event) {
+                      var card = event.target.closest(".detail-info");
+                      var dots = card.querySelector("#dots");
+                      var more = card.querySelector("#more");
+                      var btn = card.querySelector("#btn");
+
+                        if (dots.style.display === "none") {
+                             dots.style.display="inline";
+                             btn.innerHTML="Details";
+                             more.style.display="none";
+                        } else {
+                             dots.style.display="none";
+                             btn.innerHTML="Hide";
+                             more.style.display="inline";
+                         }
+                        }
+                    </script>
+                    <style>
+                         #more {display:none;}
+                    </style>
+                    <div class="detail-info">
+                    <button type="button" class="btn btn-primary" id="btn" onclick="readMore(event)">Details</button> <p><span id="dots"></span>
+                    <span id="more"> Address: {{item.place_adress}} <br> Place: {{item.place_name}} <br> Price: {{item.place_price}} <br></span></p>
+                </div>
+                </td>
+                <td>
+                    {% if session['role'] == 'admin' %}
+                        <a href="/edit_fest/{{item.fest_name}}" type="button" class="btn btn-warning">Edit</a>
+                        <a href="/delete_fest/{{item.fest_name}}" type="button" class="btn btn-danger">Delete</a>
+                    {% endif %}
+                    {% if (session['role'] == 'people_email') and (item.people_email == session['people_email']) %}
+                        <a href="/edit_fest/{{item.fest_name}}" type="button" class="btn btn-warning">Edit</a>
+                        <a href="/delete_fest/{{item.fest_name}}" type="button" class="btn btn-danger">Delete</a>
+                    {% endif %}
+                </td>
+             </tr>
+            {% endfor %}
+            </thread>
+        </table>
+
+    <td> <a href="/create_fest" type="button" class="btn btn-success">New Event</a> </td>
+
+
+{% endblock %}

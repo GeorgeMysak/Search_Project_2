@@ -1,0 +1,12 @@
+FROM python:3.8-slim
+
+WORKDIR /usr/src/app
+
+COPY requirements.txt .
+
+RUN \
+    pip install -r $PATH_TO_BLOCK/requirements.txt
+
+COPY . .
+
+CMD ["python3", "app.py"]

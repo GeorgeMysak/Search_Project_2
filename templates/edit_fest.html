@@ -1,0 +1,48 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+
+<div class="col-md-6 mx-auto">
+
+    <div class="card rounded-0">
+
+        <div class="card-header">
+            <h3 class="mb-0">Edit Fest-Name: {{form_name}}</h3>
+        </div>
+        <div class="card-body">
+
+            <form class="form" method="POST">
+                {{ form.hidden_tag() }}
+
+
+
+
+            <div class="form-group">
+                {{ form.fest_date.label }}
+                {{ form.fest_date(class_="form-control") }}
+
+                {% if form.fest_date.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.fest_date.errors %}
+                             <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {%endif%}
+            </div>
+
+
+                {{ form.submit(class_="btn btn-success") }}
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+
+{% endblock %}

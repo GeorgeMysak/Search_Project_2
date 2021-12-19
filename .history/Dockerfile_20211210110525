@@ -1,0 +1,20 @@
+ARG APP_IMAGE=python:3.8.2-alpine
+
+FROM $APP_IMAGE AS base
+
+FROM base as builder
+
+RUN mkdir /requirements
+WORKDIR /requirements
+
+COPY requirements.txt /requirements.txt
+
+RUN pip install --install-option="--prefix=/requirements" -r /requirements.txt
+
+FROM base
+ENV FLASK_APP app.py
+WORKDIR /app
+COPY --from=builder /requirements /usr/local
+ADD . /app
+
+ENTRYPOINT ["python", "-m", "flask", "run", "--host=0.0.0.0"]
